@@ -14,7 +14,29 @@ public class MusicDriveSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("A kezdetek:");
+        System.out.println("Ez a program a videó linkjének és címének tárolását látja el, ami a youtube-ról törölt videók megkeresése esetén hasznos.");
+        /**
+         * Funkciók:
+         * Linkek megjelenítése, Cím, [feltöltési dátum, leírás, kommentek, egyebek]
+         * - Hozzáadás
+         * - Törlés
+         * - Módosítás
+         * 
+         * Lejátszási lista
+         * 
+         * Zenegép
+         * 
+         * Input:
+         * Link, cím
+         * 
+         * Output:
+         * Linkek, Címek
+         * 
+         * Adatok mentése:
+         * 1. fájl: azon, Cím, Link
+         * 2. Fájl: zeneAzon(Key), listaAzon(Key)
+         * 3. Fájl: azon, Név
+         */
     }
     
 }
