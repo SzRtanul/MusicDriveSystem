@@ -4,10 +4,24 @@
  */
 package program;
 
+import java.io.*;
+import java.util.*;
+
 /**
  *
  * @author SzabóRoland(SZOFT_20
  */
 public class MusicDriveL {
     
+    public MusicDriveL() {
+        
+    }
+    
+    public void Save() throws FileNotFoundException{
+        PrintWriter pn = new PrintWriter("a");
+        pn.write("asdf");
+    }
+    public void Load(){
+        Scanner sc = new Scanner("");
+    }
 }
