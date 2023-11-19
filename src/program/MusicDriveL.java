@@ -24,7 +24,6 @@ public class MusicDriveL {
             fileWriter = new OutputStreamWriter(new FileOutputStream(FileName), StandardCharsets.UTF_8);
             PrintWriter pn = new PrintWriter(fileWriter);
             for (String item : items){
-                // System.out.println(item);
                 pn.println(item);
                 pn.flush();
             }
@@ -40,7 +39,6 @@ public class MusicDriveL {
         try(Scanner sc = new Scanner(f)){
             while(sc.hasNextLine()){
                 String a = sc.nextLine();
-                System.out.println(a);
                 items.add(a);
             }
             sc.close();

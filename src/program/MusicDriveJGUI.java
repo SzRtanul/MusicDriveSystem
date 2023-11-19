@@ -155,7 +155,9 @@ public class MusicDriveJGUI extends javax.swing.JFrame {
         int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
         List<String> l = new ArrayList<String>();
         for (int i = 0 ; i < nRow ; i++){
-            l.add(dtm.getValueAt(i, 0)+";"+dtm.getValueAt(i, 1));
+            var a1 = dtm.getValueAt(i, 0) != "" ? dtm.getValueAt(i, 0) : "-";
+            var a2 = dtm.getValueAt(i, 1) != "" ? dtm.getValueAt(i, 1) : "-";
+            l.add(a1 +";"+ a2);
         }  
         MusicDriveL.Save("Elem.ul", l);
     }//GEN-LAST:event_Bt_SaveActionPerformed
