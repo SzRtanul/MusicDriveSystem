@@ -5,7 +5,11 @@
 package program;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
 
 /**
  *
@@ -13,15 +17,37 @@ import java.util.*;
  */
 public class MusicDriveL {
     
-    public MusicDriveL() {
-        
+    public static void Save(String FileName, List<String> items){
+        File f = new File(FileName);
+        Writer fileWriter;
+        try {
+            fileWriter = new OutputStreamWriter(new FileOutputStream(FileName), StandardCharsets.UTF_8);
+            PrintWriter pn = new PrintWriter(fileWriter);
+            for (String item : items){
+                // System.out.println(item);
+                pn.println(item);
+                pn.flush();
+            }
+            pn.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MusicDriveL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void Save() throws FileNotFoundException{
-        PrintWriter pn = new PrintWriter("a");
-        pn.write("asdf");
-    }
-    public void Load(){
-        Scanner sc = new Scanner("");
+    public static List Load(String FileName)/* throws FileNotFoundException */{
+        File f = new File(FileName);
+        List<String> items = new ArrayList<String>();
+        try(Scanner sc = new Scanner(f)){
+            while(sc.hasNextLine()){
+                String a = sc.nextLine();
+                System.out.println(a);
+                items.add(a);
+            }
+            sc.close();
+        } catch (FileNotFoundException ex) {
+            //Logger.getLogger(MusicDriveL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return items;
     }
 }

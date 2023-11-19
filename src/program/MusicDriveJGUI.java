@@ -4,6 +4,10 @@
  */
 package program;
 
+import java.util.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.*;
+
 /**
  *
  * @author SzabóRoland(SZOFT_20
@@ -15,6 +19,7 @@ public class MusicDriveJGUI extends javax.swing.JFrame {
      */
     public MusicDriveJGUI() {
         initComponents();
+        initChanges();
     }
 
     /**
@@ -26,47 +31,179 @@ public class MusicDriveJGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        Bt_RowAdd = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Tbl_link = new javax.swing.JTable();
+        Bt_Save = new javax.swing.JButton();
+        Bt_def = new javax.swing.JButton();
+        Bt_clear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButton1.setText("+");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+
+        Bt_RowAdd.setText("+");
+        Bt_RowAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_RowAddActionPerformed(evt);
+            }
+        });
+
+        Tbl_link.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cím", "Link"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(Tbl_link);
+
+        Bt_Save.setText("Mentés");
+        Bt_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_SaveActionPerformed(evt);
+            }
+        });
+
+        Bt_def.setText("Alaphelyzet");
+        Bt_def.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_defActionPerformed(evt);
+            }
+        });
+
+        Bt_clear.setText("Clear");
+        Bt_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_clearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addGap(52, 52, 52))
+                        .addComponent(Bt_def)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Bt_Save)
+                        .addGap(52, 52, 52))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(Bt_RowAdd))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(Bt_clear)))
+                        .addGap(16, 16, 16))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Bt_RowAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Bt_clear)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Bt_Save)
+                    .addComponent(Bt_def))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void initChanges(){
+       DefaultTableModel model = (DefaultTableModel) Tbl_link.getModel();
+       List l = MusicDriveL.Load("Elem.ul");
+        for (int i = 0; i < l.size(); i++) {
+            System.out.println(l.get(i).toString());
+            String[] kG = l.get(i).toString().split(";");
+            if (kG.length == 2) model.addRow(new Object[]{kG[0], kG[1]});
+        }      
+        model.addRow(new Object[]{"", ""});
+    }
+    
+    private void Bt_RowAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_RowAddActionPerformed
+        DefaultTableModel model = (DefaultTableModel) Tbl_link.getModel();
+        model.addRow(new Object[]{"", ""});
+    }//GEN-LAST:event_Bt_RowAddActionPerformed
+
+    private void Bt_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_SaveActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) Tbl_link.getModel();
+        int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
+        List<String> l = new ArrayList<String>();
+        for (int i = 0 ; i < nRow ; i++){
+            l.add(dtm.getValueAt(i, 0)+";"+dtm.getValueAt(i, 1));
+        }  
+        MusicDriveL.Save("Elem.ul", l);
+    }//GEN-LAST:event_Bt_SaveActionPerformed
+
+    private void Bt_defActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_defActionPerformed
+        DefaultTableModel model = (DefaultTableModel) Tbl_link.getModel();
+        model.setRowCount(0);
+        initChanges();
+    }//GEN-LAST:event_Bt_defActionPerformed
+
+    private void Bt_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_clearActionPerformed
+        DefaultTableModel model = (DefaultTableModel) Tbl_link.getModel();
+        model.setRowCount(0);
+        model.addRow(new Object[]{"", ""});
+    }//GEN-LAST:event_Bt_clearActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int result = JOptionPane.showOptionDialog(
+                null,
+                "Szeretné menteni a táblát?",
+                "Bezárás",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[]{"Mentés", "Nincs mentés", "Mégsem"},
+                "Mentés"
+        );
+        switch (result) {
+            case JOptionPane.YES_OPTION:
+                Bt_SaveActionPerformed(null);
+                System.exit(0);
+                break;
+            case JOptionPane.NO_OPTION:
+                System.exit(0);
+                break;
+            case JOptionPane.CANCEL_OPTION:
+                System.out.println("Felhasználó válasza: Mégsem");
+                //this.setVisible(true);
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                break;
+            default:
+                System.out.println("Felhasználó válasza: Mégsem vagy bezárás a címsorban");
+                // Ide írd meg a mégsem vagy bezárás logikát
+                break;
+        }
+    }//GEN-LAST:event_formWindowClosing
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -103,8 +240,11 @@ public class MusicDriveJGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton Bt_RowAdd;
+    private javax.swing.JButton Bt_Save;
+    private javax.swing.JButton Bt_clear;
+    private javax.swing.JButton Bt_def;
+    private javax.swing.JTable Tbl_link;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
